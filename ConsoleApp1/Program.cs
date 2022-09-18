@@ -143,6 +143,11 @@ namespace Program
             Person p2 = new Person("Mikola", "Masian", default(DateTime));
             Console.WriteLine(p2.Equals(p1));
             Console.WriteLine(p1 == p2);
+            Console.WriteLine("\n\n\n");
+            Console.WriteLine(new Student());
+            TestCollection testcoll = new TestCollection(10000000);
+            Console.WriteLine("Створенно!");
+            testcoll.searchTime();
         }
     }
 }

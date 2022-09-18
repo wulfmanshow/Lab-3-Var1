@@ -31,7 +31,10 @@ namespace Program
         }
 
         //
-        public Student() : this("Mikola", "Masian", DateTime.Now, new Education(), 101) { }
+        public Student() : this(RndGenerator.GenerateName(5), RndGenerator.GenerateName(8), RndGenerator.GenerateBornDate(), new Education(), 101)
+        {
+
+        }
 
 
         //
