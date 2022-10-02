@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Program
 {
     //-----------------------------------------------------------------------//
-    class Student : Person, IDateAndCopy, IEnumerable
+    public class Student : Person, IDateAndCopy, IEnumerable
     {
 
         private Education formstud;

@@ -4,23 +4,52 @@ using System.Collections.Generic;
 namespace Program
 {
     //-----------------------------------------------------------------------//
+  
     class studentCollection
     {
         List<Student> _students = new List<Student>();
         public double MaxAvarage { get; set; }
-        public void AddDefaults(int count)
+        public string CollectionName { get; set; }
+        public event StudentListHandler StudentCountChanged;
+        public event StudentListHandler StudentReferenceChanged;
+
+        public bool Remove(int j)
         {
-            while (count > 0)
+            if (j < 0|| j>=_students.Count)
             {
-                _students.Add(new Student());
-                count--;
+                return false;
+            }
+            Student DeletedElem = _students[j];
+            _students.RemoveAt(j);
+            StudentCountChanged(this,new StudentListHandlerEventArgs(CollectionName,"Remove",DeletedElem));
+            return true;
+        }
+        public Student this[int index]
+        {
+            get { return _students[index]; }
+            set 
+            { 
+                _students[index] = value;
+                if (StudentReferenceChanged != null) StudentReferenceChanged(this, new StudentListHandlerEventArgs(CollectionName, "Append", value));
             }
         }
+        public void AddDefaults(int count)
+        {
+            for(int i = 0;i<count;i++)
+            {
+                Student student = new Student();
+                _students.Add(student);
+                
+                if (StudentReferenceChanged != null) StudentCountChanged(this, new StudentListHandlerEventArgs(CollectionName, "Append", student));
+            }
+        }
+        
         public void AddStudent(params Student[] studentsp)
         {
             foreach (Student obj in studentsp)
             {
                _students.Add(obj);
+                if (StudentCountChanged != null) { StudentCountChanged(this, new StudentListHandlerEventArgs(CollectionName, "Append", obj)); };
             }
         }
         public override string ToString()

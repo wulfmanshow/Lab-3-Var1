@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace Program
 {
    
-    class Person : IDateAndCopy, IComparable
+    public class Person : IDateAndCopy, IComparable
     {
         private string name;
         private string surname;

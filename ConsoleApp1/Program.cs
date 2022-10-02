@@ -1,12 +1,13 @@
 ﻿using System;
 namespace Program
 {
+
     interface IDateAndCopy
     {
         Object DeepCopy();
         public DateTime Date { get; set; }
     }
-    enum Education
+    public enum Education
     {
         Master,
         Bachelor,
@@ -145,9 +146,34 @@ namespace Program
             Console.WriteLine(p1 == p2);
             Console.WriteLine("\n\n\n");
             Console.WriteLine(new Student());
-            TestCollection testcoll = new TestCollection(10000000);
+            TestCollection testcoll = new TestCollection(1000);
             Console.WriteLine("Створенно!");
-            testcoll.searchTime();
+            testcoll.searchTime(new Student());
+            Console.WriteLine("\n\n\n");
+            testcoll.searchTimeDefault();
+            studentCollection studentcoll1 = new studentCollection();
+            studentCollection studentcoll2 = new studentCollection();
+            Journal journal1 = new Journal();
+            Journal journal2 = new Journal();
+            studentcoll1.StudentCountChanged += journal1.StudentCountChanged;
+            studentcoll1.StudentReferenceChanged += journal1.StudentReferenceChanged;
+            studentcoll1.StudentCountChanged += journal2.StudentCountChanged;
+            studentcoll1.StudentReferenceChanged += journal2.StudentReferenceChanged;
+            studentcoll2.StudentCountChanged += journal2.StudentCountChanged;
+            studentcoll2.StudentReferenceChanged += journal2.StudentReferenceChanged;
+            studentcoll1.AddDefaults(10);
+            Console.WriteLine(studentcoll1.ToString());
+            studentcoll2.AddDefaults(11);
+            Console.WriteLine(studentcoll2.ToString());
+            studentcoll1.Remove(4);
+            Console.WriteLine(studentcoll1.ToString());
+            studentcoll2.Remove(5);
+            Console.WriteLine(studentcoll2.ToString());
+            studentcoll1[2] = new Student();
+            Console.WriteLine(studentcoll1.ToString());
+            studentcoll2[5] = new Student();
+            Console.WriteLine(studentcoll2.ToString());
+            Console.WriteLine($"journal 1 -{journal1.ToString()}\n journal 2 -{journal2.ToString()}");
         }
     }
 }
