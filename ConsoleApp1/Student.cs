@@ -10,8 +10,8 @@ namespace Program
 
         private Education formstud;
         private int idgroup;
-        private List<Test> _TestList = new List<Test>();
-        protected List<Exam> _ExamList = new List<Exam>();
+        private List<Test> TestList = new List<Test>();
+        protected List<Exam> ExamList = new List<Exam>();
 
 
         //
@@ -19,7 +19,7 @@ namespace Program
         {
             formstud = form;
             idgroup = idgp;
-            _ExamList = new List<Exam>();
+            ExamList = new List<Exam>();
         }
 
         //
@@ -27,7 +27,7 @@ namespace Program
         {
             formstud = form;
             idgroup = idgp;
-            _ExamList = Examlist;
+            ExamList = Examlist;
         }
 
         //
@@ -43,16 +43,16 @@ namespace Program
             get => new Person(Name, SurName, Date);
             set { this.Name = value.Name; this.SurName = value.SurName; this.Date = value.Date; }
         }
-        public override object DeepCopy() => new Student(Name, SurName, Date, formstud, idgroup, _ExamList);
+        public override object DeepCopy() => new Student(Name, SurName, Date, formstud, idgroup, ExamList);
 
         //
-        public double AvarageExam
+        public double AverageExam
         {
             get
             {
                 int count = 0;
                 int sum = 0;
-                foreach (Exam obj in _ExamList)
+                foreach (Exam obj in ExamList)
                 {
                     count++;
                     sum += obj.Mark;
@@ -66,8 +66,8 @@ namespace Program
         //
         public List<Exam> Exams
         {
-            get { return _ExamList; }
-            set { _ExamList = value; }
+            get { return ExamList; }
+            set { ExamList = value; }
         }
 
         //
@@ -103,13 +103,13 @@ namespace Program
         //
         public void AddExam(Exam exam)
         {
-            _ExamList.Add(exam);
+            ExamList.Add(exam);
         }
 
         //
         public void AddTest(Test test)
         {
-            _TestList.Add(test);
+            TestList.Add(test);
         }
 
         //
@@ -118,7 +118,7 @@ namespace Program
 
             foreach (Exam obj in exams)
             {
-                _ExamList.Add(obj);
+                ExamList.Add(obj);
             }
         }
 
@@ -128,7 +128,7 @@ namespace Program
 
             foreach (Test obj in tests)
             {
-                _TestList.Add(obj);
+                TestList.Add(obj);
             }
         }
 
@@ -136,19 +136,17 @@ namespace Program
         public override string ToString()
         {
             StringBuilder data = new StringBuilder();
-            foreach (Exam obj in _ExamList)
+            foreach (Exam obj in ExamList)
             {
                 data.Append(obj.ToString());
             }
-            string allpoles = $" {base.ToString()}, School Form: {Form}, ID: {IdGroup}, All Exams: {data.ToString()}\n";
-            return allpoles;
+            return $" {base.ToString()}, School Form: {Form}, ID: {IdGroup}, All Exams: {data.ToString()}\n";
         }
 
         //
         public override string ToShortString()
         {
-            string allpoles = $" {base.ToShortString()}, School Form: {Form}, ID: {IdGroup}, Year Mark: {AvarageExam}\n";
-            return allpoles;
+            return $" {base.ToShortString()}, School Form: {Form}, ID: {IdGroup}, Year Mark: {AverageExam}\n";
         }
 
         //
@@ -171,14 +169,14 @@ namespace Program
         {
             get
             {
-                foreach (Exam ex in _ExamList)
+                foreach (Exam ex in ExamList)
                 {
                     if (ex.Mark >= 2)
                     {
                         yield return ex.Yrok;
                     }
                 }
-                foreach (Test t in _TestList)
+                foreach (Test t in TestList)
                 {
                     if (t._info == true)
                     {
@@ -192,9 +190,9 @@ namespace Program
         public IEnumerator GetEnumerator()
         {
             //return new StudentEnumerator(_ExamList);
-            foreach(Exam ex in _ExamList )
+            foreach(Exam ex in ExamList )
             {
-                foreach(Test t in _TestList)
+                foreach(Test t in TestList)
                 {
                     if(t.Name == ex.Yrok)
                     {

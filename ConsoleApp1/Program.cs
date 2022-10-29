@@ -148,9 +148,9 @@ namespace Program
             Console.WriteLine(new Student());
             TestCollection testcoll = new TestCollection(1000);
             Console.WriteLine("Створенно!");
-            testcoll.searchTime(new Student());
+            testcoll.SearchTime(new Student());
             Console.WriteLine("\n\n\n");
-            testcoll.searchTimeDefault();
+            testcoll.SearchTimeDefault();
             studentCollection studentcoll1 = new studentCollection();
             studentCollection studentcoll2 = new studentCollection();
             Journal journal1 = new Journal();

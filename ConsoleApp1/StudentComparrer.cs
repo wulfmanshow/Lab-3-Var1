@@ -9,7 +9,7 @@ namespace Program
     {
         public int Compare( Student x, Student y)
         {
-            return (int)(x.AvarageExam - y.AvarageExam);
+            return (int)(x.AverageExam - y.AverageExam);
         }
 
     }

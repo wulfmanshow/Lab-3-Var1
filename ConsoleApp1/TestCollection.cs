@@ -6,75 +6,73 @@ namespace Program
 {
     class TestCollection
     {
-        public List<Person> _persColl = new List<Person>();
-        public List<string> _str = new List<string>();
-        public Dictionary<Person, Student> _personStud = new Dictionary<Person, Student>();
-        public Dictionary<string, Student> _stringStud = new Dictionary<string, Student>();
-        private Student stud;
+        public List<Person> persColl = new List<Person>();
+        public List<string> str = new List<string>();
+        public Dictionary<Person, Student> personStud = new Dictionary<Person, Student>();
+        public Dictionary<string, Student> stringStud = new Dictionary<string, Student>();
+        private Student _stud;
 
         public TestCollection(int CollSize)
         {
-         for(int i = 0; i < CollSize; i++)
+            for (int i = 0; i < CollSize; i++)
             {
-                 stud = NewStudent(i);
+                _stud = NewStudent(i);
 
-                _persColl.Add(stud);
-                _str.Add(stud.ToShortString());
-                _personStud.Add(stud, stud);
-                _stringStud.Add(stud.ToShortString(), stud);
-            }   
+                persColl.Add(_stud);
+                str.Add(_stud.ToShortString());
+                personStud.Add(_stud, _stud);
+                stringStud.Add(_stud.ToShortString(), _stud);
+            }
         }
 
-        public void searchTimeDefault()
+        public void SearchTimeDefault()
         {
-            searchTime(stud);
+            SearchTime(_stud);
         }
 
 
-        public void searchTime(Student student)
+        public void SearchTime(Student student)
         {
             Person person = student;
             int index = 0;
             string shortStud = student.ToShortString();
             int time = Environment.TickCount;
             bool isFounded = false;
-           isFounded = _persColl.Contains(student);
-            time = Environment.TickCount- time;
+            isFounded = persColl.Contains(student);
+            time = Environment.TickCount - time;
             Console.WriteLine($"знайдено:{isFounded}, час пошуку елемента _persColl: {time}\n");
-             time = Environment.TickCount;
-            isFounded = _str.Contains(shortStud);
+            time = Environment.TickCount;
+            isFounded = str.Contains(shortStud);
             time = Environment.TickCount - time;
             Console.WriteLine($"знайдено:{isFounded}, час пошуку елемента _str: {time}\n");
-
             time = Environment.TickCount;
-            index = _persColl.LastIndexOf(student);
+            index = persColl.LastIndexOf(student);
             time = Environment.TickCount - time;
             Console.WriteLine($"Індекс:{index}, час пошуку елемента _persColl: {time}\n");
             time = Environment.TickCount;
-            index = _str.LastIndexOf(shortStud);
+            index = str.LastIndexOf(shortStud);
             time = Environment.TickCount - time;
             Console.WriteLine($"Індекс:{index}, час пошуку елемента _str: {time}\n");
-
             time = Environment.TickCount;
-            isFounded = _personStud.ContainsKey(person);
+            isFounded = personStud.ContainsKey(person);
             time = Environment.TickCount - time;
             Console.WriteLine($"знайдено:{isFounded}, час пошуку елемента по ключу _personStud: {time}\n");
             time = Environment.TickCount;
-            isFounded = _stringStud.ContainsKey(shortStud);
+            isFounded = stringStud.ContainsKey(shortStud);
             time = Environment.TickCount - time;
             Console.WriteLine($"знайдено:{isFounded}, час пошуку елемента по ключу _stringStud: {time}\n");
             time = Environment.TickCount;
-            isFounded = _personStud.ContainsValue(student);
+            isFounded = personStud.ContainsValue(student);
             time = Environment.TickCount - time;
             Console.WriteLine($"знайдено:{isFounded}, час пошуку елемента по значенню _personStud: {time}\n");
             time = Environment.TickCount;
-            isFounded =_stringStud.ContainsValue(student);
+            isFounded = stringStud.ContainsValue(student);
             time = Environment.TickCount - time;
             Console.WriteLine($"знайдено:{isFounded}, час пошуку елемента по значенню _stringStud: {time}\n");
 
         }
 
-         public static  Student NewStudent(int param)
+        public static Student NewStudent(int param)
         {
             return new Student();
         }

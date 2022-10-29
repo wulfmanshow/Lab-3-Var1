@@ -8,7 +8,6 @@ namespace Program
     class studentCollection
     {
         List<Student> _students = new List<Student>();
-        public double MaxAvarage { get; set; }
         public string CollectionName { get; set; }
         public event StudentListHandler StudentCountChanged;
         public event StudentListHandler StudentReferenceChanged;
@@ -38,8 +37,7 @@ namespace Program
             for(int i = 0;i<count;i++)
             {
                 Student student = new Student();
-                _students.Add(student);
-                
+                _students.Add(student);                
                 if (StudentReferenceChanged != null) StudentCountChanged(this, new StudentListHandlerEventArgs(CollectionName, "Append", student));
             }
         }
@@ -79,6 +77,16 @@ namespace Program
             List<Student> copy = _students.ToList();
             copy.Sort();
             return copy;
+        }
+        public double MaxAverageMark 
+        {    
+            get {
+                if (_students.Count == 0)
+                {
+                    return 0;
+                }
+                return _students.Max(x=>x.AverageExam);
+            }
         }
 
     }
