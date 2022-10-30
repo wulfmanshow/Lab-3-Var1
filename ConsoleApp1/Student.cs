@@ -31,7 +31,7 @@ namespace Program
         }
 
         //
-        public Student() : this(RndGenerator.GenerateName(5), RndGenerator.GenerateName(8), RndGenerator.GenerateBornDate(), new Education(), 101)
+        public Student() : this(RndGenerator.GenerateName(5), RndGenerator.GenerateName(8), RndGenerator.GenerateBornDate(), new Education(), 101,ExamGenerator.CreateExamList())
         {
             Array values = Enum.GetValues(typeof(Education));
             Random random = new Random();
@@ -142,7 +142,7 @@ namespace Program
             {
                 data.Append(obj.ToString());
             }
-            return $" {base.ToString()}, School Form: {Form}, ID: {IdGroup}, All Exams: {data.ToString()}\n";
+            return $" {base.ToString()}, School Form: {Form}, ID: {IdGroup}, All Exams: {data.ToString()}, AverageMark:{AverageExam}\n";
         }
 
         //

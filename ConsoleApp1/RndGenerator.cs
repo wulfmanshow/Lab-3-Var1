@@ -32,11 +32,8 @@ namespace Program
         }
         public static DateTime GenerateBornDate()
         {
-            return DateTime.Now.AddYears(-(rnd.Next(16, 30))).AddDays(rnd.Next(1, 365));
+            return DateTime.Now.AddYears(-(rnd.Next(16, 30+1))).AddDays(rnd.Next(1, 365+1));
         }
-        public static DateTime GenerateExamDate()
-        {
-            return DateTime.Now.AddDays(rnd.Next(1, 365));
-        }
+     
     }
 }

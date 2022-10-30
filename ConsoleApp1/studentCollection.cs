@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using System.Linq;
 using System.Collections.Generic;
+using System;
+
 namespace Program
 {
     //-----------------------------------------------------------------------//
@@ -81,10 +83,12 @@ namespace Program
             copy.Sort();
             return copy;
         }
-        //public List<Student> AverageMarkGroup(double value)
-        //{
 
-        //}
+        public List<Student> AverageMarkGroup(double value )
+        {
+            return _students.GroupBy(x => Math.Floor(x.AverageExam))?.Where(g=>g.Key==Math.Floor(value))?.SelectMany(s=>s).ToList();
+        }
+
         public double MaxAverageMark
         {
             get
@@ -97,13 +101,7 @@ namespace Program
             }
         }
 
-        public IEnumerable<Student> Masters
-        {
-            get
-            {
-                return _students.Where(x => x.Form == Education.Master);
-            }
-        }
+       
 
         public IEnumerable<Student> Masters
         {

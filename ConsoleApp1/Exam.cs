@@ -16,7 +16,7 @@ namespace Program
             Dateisp = Dateispp;
         }
 
-        public Exam() : this("", 0, default(DateTime)) { }
+        public Exam() : this("", 3, default(DateTime)) { }
         
         //
         public string YrokP
