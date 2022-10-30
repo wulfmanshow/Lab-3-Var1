@@ -174,6 +174,11 @@ namespace Program
             studentcoll2[5] = new Student();
             Console.WriteLine(studentcoll2.ToString());
             Console.WriteLine($"journal 1 -{journal1.ToString()}\n journal 2 -{journal2.ToString()}");
+            foreach(Student student in studentcoll1.Masters)
+            {
+                Console.WriteLine(student.ToString());
+            }
+            Console.WriteLine(studentcoll1.MaxAverageMark);
         }
     }
 }
