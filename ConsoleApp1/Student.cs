@@ -8,32 +8,34 @@ namespace Program
     public class Student : Person, IDateAndCopy, IEnumerable
     {
 
-        private Education formstud;
-        private int idgroup;
-        private List<Test> TestList = new List<Test>();
+        private Education _educationForm;
+        private int _groupId;
+        private List<Test> _TestList = new List<Test>();
         protected List<Exam> ExamList = new List<Exam>();
 
 
         //
         public Student(string name, string surname, DateTime date, Education form, int idgp) : base(name, surname, date)
         {
-            formstud = form;
-            idgroup = idgp;
+            _educationForm = form;
+            _groupId = idgp;
             ExamList = new List<Exam>();
         }
 
         //
         public Student(string name, string surname, DateTime date, Education form, int idgp, List<Exam> Examlist) : base(name, surname, date)
         {
-            formstud = form;
-            idgroup = idgp;
+            _educationForm = form;
+            _groupId = idgp;
             ExamList = Examlist;
         }
 
         //
         public Student() : this(RndGenerator.GenerateName(5), RndGenerator.GenerateName(8), RndGenerator.GenerateBornDate(), new Education(), 101)
         {
-
+            Array values = Enum.GetValues(typeof(Education));
+            Random random = new Random();
+            _educationForm = (Education)values.GetValue(random.Next(values.Length));
         }
 
 
@@ -43,7 +45,7 @@ namespace Program
             get => new Person(Name, SurName, Date);
             set { this.Name = value.Name; this.SurName = value.SurName; this.Date = value.Date; }
         }
-        public override object DeepCopy() => new Student(Name, SurName, Date, formstud, idgroup, ExamList);
+        public override object DeepCopy() => new Student(Name, SurName, Date, _educationForm, _groupId, ExamList);
 
         //
         public double AverageExam
@@ -73,21 +75,21 @@ namespace Program
         //
         public Education Form
         {
-            get { return formstud; }
-            set { formstud = value; }
+            get { return _educationForm; }
+            set { _educationForm = value; }
         }
 
         //
         public int IdGroup
         {
-            get { return idgroup; }
+            get { return _groupId; }
             set
             {
-                if (idgroup <= 100 && idgroup >= 699)
+                if (_groupId <= 100 && _groupId >= 699)
                 {
                     throw new Exception("Помилка:номер группи має бути вище 100 і менше 699!");
                 }
-                idgroup = value;
+                _groupId = value;
             }
         }
 
@@ -95,7 +97,7 @@ namespace Program
         //
         public bool this[Education index]
         {
-            get { return index == formstud; }
+            get { return index == _educationForm; }
 
         }
 
@@ -109,7 +111,7 @@ namespace Program
         //
         public void AddTest(Test test)
         {
-            TestList.Add(test);
+            _TestList.Add(test);
         }
 
         //
@@ -128,7 +130,7 @@ namespace Program
 
             foreach (Test obj in tests)
             {
-                TestList.Add(obj);
+                _TestList.Add(obj);
             }
         }
 
@@ -176,7 +178,7 @@ namespace Program
                         yield return ex.Yrok;
                     }
                 }
-                foreach (Test t in TestList)
+                foreach (Test t in _TestList)
                 {
                     if (t._info == true)
                     {
@@ -192,7 +194,7 @@ namespace Program
             //return new StudentEnumerator(_ExamList);
             foreach(Exam ex in ExamList )
             {
-                foreach(Test t in TestList)
+                foreach(Test t in _TestList)
                 {
                     if(t.Name == ex.Yrok)
                     {
@@ -201,7 +203,6 @@ namespace Program
                 } 
             }
         }
-
 
     }
 }

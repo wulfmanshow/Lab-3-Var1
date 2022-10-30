@@ -50,6 +50,9 @@ namespace Program
                 if (StudentCountChanged != null) { StudentCountChanged(this, new StudentListHandlerEventArgs(CollectionName, "Append", obj)); };
             }
         }
+
+
+
         public override string ToString()
         {
             StringBuilder data = new StringBuilder();
@@ -101,6 +104,12 @@ namespace Program
                 return _students.Where(x => x.Form == Education.Master);
             }
         }
+
+        public IEnumerable<Student> Masters
+        {
+            get { return _students.Where(x=>x.Form == Education.Master); }
+        }
+
 
     }
 }
