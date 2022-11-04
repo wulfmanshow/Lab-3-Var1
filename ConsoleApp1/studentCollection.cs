@@ -13,7 +13,7 @@ namespace Program
         public string CollectionName { get; set; }
         public event StudentListHandler StudentCountChanged;
         public event StudentListHandler StudentReferenceChanged;
-
+        
         public bool Remove(int j)
         {
             if (j < 0 || j >= _students.Count)
